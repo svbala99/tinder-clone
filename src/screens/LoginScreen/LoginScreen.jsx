@@ -1,7 +1,15 @@
 import {Button, TextInput} from 'react-native-paper';
 import {
+  COLOR_BACKGROUND,
+  COLOR_CHARCOAL,
+  COLOR_PRIMARY,
+  COLOR_PRIMARY_VARIANT,
+  COLOR_WHITE,
+} from '../../constants/colors';
+import {
   Image,
   Keyboard,
+  SafeAreaView,
   StyleSheet,
   Text,
   ToastAndroid,
@@ -23,15 +31,13 @@ import {
 } from '../../services/firebaseClient';
 
 import {SCREEN_WIDTH} from '../../helpers/normalizer';
-import {useTheme} from '@react-navigation/native';
-
-// import { LOGO } from '../../constants/images';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: COLOR_BACKGROUND,
   },
   input: {
     width: SCREEN_WIDTH - SPACE_24,
@@ -46,18 +52,19 @@ const styles = StyleSheet.create({
   registerLink: {
     fontSize: SPACE_16,
     textDecorationLine: 'underline',
+    color: COLOR_PRIMARY_VARIANT,
   },
-  bottomLine: {fontSize: SPACE_16, marginTop: SPACE_24},
+  bottomLine: {fontSize: SPACE_16, marginTop: SPACE_24, color: COLOR_CHARCOAL},
 });
 
 function LoginScreen({navigation}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
-  const refInput2 = useRef();
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const {colors} = useTheme();
-  const {background: backgroundColor, primary, text} = colors;
+  const refInput2 = useRef();
 
   const handleEmailLogin = async () => {
     Keyboard.dismiss();
@@ -79,35 +86,32 @@ function LoginScreen({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image
         source={{
           uri: URL.appIcon,
         }}
         style={styles.appImage}
       />
-      <Text style={[styles.appNameText, {color: text}]}>
-        {strings.APP_NAME}
-      </Text>
+      <Text style={[styles.appNameText]}>{strings.APP_NAME}</Text>
       <TextInput
-        theme={{colors: {primary, background: backgroundColor}}}
-        contentStyle={{color: text}}
+        textColor={COLOR_WHITE}
+        theme={{colors: {primary: COLOR_PRIMARY, background: COLOR_BACKGROUND}}}
         style={styles.input}
         keyboardType="email-address"
         mode="outlined"
         label={strings.EMAIL}
         value={username}
         onChangeText={updatedText => setUsername(updatedText)}
-        autoFocus
         returnKeyType="next"
         onSubmitEditing={() => refInput2.current.focus()}
       />
       <TextInput
+        textColor={COLOR_WHITE}
         secureTextEntry={showPassword}
         autoCorrect={false}
         selectionColor="transparent"
-        theme={{colors: {primary, background: backgroundColor}}}
-        contentStyle={{color: text}}
+        theme={{colors: {primary: COLOR_PRIMARY, background: COLOR_BACKGROUND}}}
         style={styles.input}
         ref={refInput2}
         mode="outlined"
@@ -122,28 +126,36 @@ function LoginScreen({navigation}) {
         }
       />
       <Button
-        theme={{colors: {primary}}}
-        onPress={handleEmailLogin}
+        loading={emailLoading}
+        theme={{colors: {primary: COLOR_PRIMARY}}}
+        onPress={() => {
+          if (username?.length > 2 && password?.length > 2) {
+            setEmailLoading(true);
+            handleEmailLogin();
+          }
+        }}
         mode="contained">
         <Text>{strings.LOGIN}</Text>
       </Button>
       <Button
+        loading={loading}
         style={{marginTop: SPACE_12}}
         icon="google"
-        theme={{colors: {primary}}}
-        onPress={handleGoogleSignin}
+        theme={{colors: {primary: COLOR_PRIMARY}}}
+        onPress={() => {
+          setLoading(true);
+          handleGoogleSignin();
+        }}
         mode="outlined">
-        <Text style={{color: text}}>{strings.LOGIN_WITH_GOOGLE}</Text>
+        <Text>{strings.LOGIN_WITH_GOOGLE}</Text>
       </Button>
-      <Text style={[styles.bottomLine, {color: text}]}>
+      <Text style={[styles.bottomLine]}>
         {strings.DONT_HAVE_ACC}
-        <Text
-          onPress={handleRegisterRedirection}
-          style={[styles.registerLink, {color: primary}]}>
+        <Text onPress={handleRegisterRedirection} style={[styles.registerLink]}>
           {strings.REGISTER_HERE}
         </Text>
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }
 

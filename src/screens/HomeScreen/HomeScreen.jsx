@@ -1,18 +1,17 @@
-import {SPACE_16, TEXT_XS_SIZE} from '../../constants/sizes';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
-import {COLOR_BLACK} from '../../constants/colors';
+import {COLOR_BACKGROUND} from '../../constants/colors';
 import React from 'react';
+import {TEXT_XS_SIZE} from '../../constants/sizes';
 import Topbar from '../../components/Topbar';
-import {useTheme} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLOR_BLACK,
+    backgroundColor: COLOR_BACKGROUND,
   },
   bg: {
-    backgroundColor: COLOR_BLACK,
+    backgroundColor: COLOR_BACKGROUND,
     flex: 1,
     borderRadius: TEXT_XS_SIZE,
   },

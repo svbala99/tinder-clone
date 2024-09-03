@@ -1,6 +1,6 @@
 import {Alert, Pressable, ToastAndroid} from 'react-native';
 import {
-  COLOR_BLACK,
+  COLOR_BACKGROUND,
   COLOR_PRIMARY,
   COLOR_TEXT_SECONDARY,
 } from '../../constants/colors';
@@ -55,31 +55,7 @@ function TabBarIcon({route = '', color = 'black', size = 24}) {
   return iconNames[route.name];
 }
 
-function ProtectedStackHOC({navigation}) {
-  const handleLogout = () => {
-    Alert.alert(strings.APP_NAME, strings.DO_YOU_WANT_TO_LOGOUT, [
-      {
-        text: strings.NO,
-        style: strings.CANCEL,
-      },
-      {
-        text: strings.YES,
-        onPress: () => {
-          firebaseSignOut();
-          ToastAndroid.showWithGravity(
-            strings.LOGOUT_SUCCESS,
-            ToastAndroid.SHORT,
-            ToastAndroid.BOTTOM,
-          );
-        },
-      },
-    ]);
-  };
-
-  const handleBackPress = () => {
-    navigation.goBack();
-  };
-
+function ProtectedStackHOC() {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -87,7 +63,7 @@ function ProtectedStackHOC({navigation}) {
         tabBarShowLabel: false,
         tabBarActiveTintColor: COLOR_PRIMARY,
         tabBarInactiveTintColor: COLOR_TEXT_SECONDARY,
-        tabBarStyle: {backgroundColor: COLOR_BLACK, borderTopWidth: 0},
+        tabBarStyle: {backgroundColor: COLOR_BACKGROUND, borderTopWidth: 0},
       })}
       initialRouteName={screenNames.Home}>
       <Tab.Screen

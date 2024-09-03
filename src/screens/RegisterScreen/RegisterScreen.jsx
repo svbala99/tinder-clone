@@ -1,5 +1,12 @@
 import {Button, TextInput} from 'react-native-paper';
 import {
+  COLOR_BACKGROUND,
+  COLOR_CHARCOAL,
+  COLOR_PRIMARY,
+  COLOR_PRIMARY_VARIANT,
+  COLOR_WHITE,
+} from '../../constants/colors';
+import {
   Image,
   Keyboard,
   StyleSheet,
@@ -21,13 +28,12 @@ import {SCREEN_WIDTH} from '../../helpers/normalizer';
 import {firebaseCreateUserWithEmailAndPassword} from '../../services/firebaseClient';
 import {useTheme} from '@react-navigation/native';
 
-// import { LOGO } from '../../constants/images';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: COLOR_BACKGROUND,
   },
   input: {
     width: SCREEN_WIDTH - SPACE_24,
@@ -42,8 +48,9 @@ const styles = StyleSheet.create({
   loginLink: {
     fontSize: SPACE_16,
     textDecorationLine: 'underline',
+    color: COLOR_PRIMARY_VARIANT,
   },
-  bottomLine: {fontSize: SPACE_16, marginTop: SPACE_24},
+  bottomLine: {fontSize: SPACE_16, marginTop: SPACE_24, color: COLOR_CHARCOAL},
 });
 
 function RegisterScreen({navigation}) {
@@ -51,9 +58,6 @@ function RegisterScreen({navigation}) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
   const refInput2 = useRef();
-
-  const {colors} = useTheme();
-  const {background: backgroundColor, primary, text} = colors;
 
   const handleEmailRegister = async () => {
     Keyboard.dismiss();
@@ -82,12 +86,10 @@ function RegisterScreen({navigation}) {
         }}
         style={styles.appImage}
       />
-      <Text style={[styles.appNameText, {color: text}]}>
-        {strings.APP_NAME}
-      </Text>
+      <Text style={[styles.appNameText]}>{strings.APP_NAME}</Text>
       <TextInput
-        theme={{colors: {primary, background: backgroundColor}}}
-        contentStyle={{color: text}}
+        theme={{colors: {primary: COLOR_PRIMARY, background: COLOR_BACKGROUND}}}
+        contentStyle={{color: COLOR_WHITE}}
         style={styles.input}
         keyboardType="email-address"
         mode="outlined"
@@ -103,8 +105,8 @@ function RegisterScreen({navigation}) {
         selectionColor="transparent"
         curs
         secureTextEntry={showPassword}
-        theme={{colors: {primary, background: backgroundColor}}}
-        contentStyle={{color: text}}
+        theme={{colors: {primary: COLOR_PRIMARY, background: COLOR_BACKGROUND}}}
+        contentStyle={{color: COLOR_WHITE}}
         style={styles.input}
         ref={refInput2}
         mode="outlined"
@@ -119,17 +121,17 @@ function RegisterScreen({navigation}) {
         }
       />
       <Button
-        theme={{colors: {primary}}}
+        theme={{colors: {primary: COLOR_PRIMARY}}}
         onPress={handleEmailRegister}
         mode="contained">
         <Text>Register</Text>
       </Button>
-      <Text style={[styles.bottomLine, {color: text}]}>
+      <Text style={[styles.bottomLine]}>
         {'Already have an account? '}
         <Text
           onPress={handleLoginRedirection}
-          style={[styles.loginLink, {color: primary}]}>
-          Login here
+          style={[styles.loginLink, {color: COLOR_PRIMARY_VARIANT}]}>
+          {'Login here'}
         </Text>
       </Text>
     </View>

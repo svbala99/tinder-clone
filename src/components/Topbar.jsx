@@ -1,7 +1,14 @@
 import * as React from 'react';
 
-import {Alert, Image, Pressable, StyleSheet, View} from 'react-native';
-import {COLOR_BLACK, COLOR_GREY} from '../constants/colors';
+import {
+  Alert,
+  Image,
+  Pressable,
+  StyleSheet,
+  ToastAndroid,
+  View,
+} from 'react-native';
+import {COLOR_BACKGROUND, COLOR_SECONDARY} from '../constants/colors';
 import {
   SPACE_104,
   SPACE_16,
@@ -17,7 +24,7 @@ import {firebaseSignOut} from '../services/firebaseClient';
 const styles = StyleSheet.create({
   container: {
     height: SPACE_64,
-    backgroundColor: COLOR_BLACK,
+    backgroundColor: COLOR_BACKGROUND,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -56,7 +63,7 @@ const Topbar = () => {
         style={styles.ml16}
       />
       <Pressable style={styles.mh16} onPress={handleLogout}>
-        <MaterialIcon name="logout" size={SPACE_24} color={COLOR_GREY} />
+        <MaterialIcon name="logout" size={SPACE_24} color={COLOR_SECONDARY} />
       </Pressable>
     </View>
   );
