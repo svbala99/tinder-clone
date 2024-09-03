@@ -1,4 +1,4 @@
-package com.tinderclonern
+package com.clone.tinder
 
 import android.app.Application
 import com.facebook.react.PackageList

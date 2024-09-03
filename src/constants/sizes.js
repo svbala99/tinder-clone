@@ -1,0 +1,37 @@
+import normalize from '../helpers/normalizer';
+
+export const SPACE_1 = normalize(1);
+export const SPACE_2 = normalize(2);
+export const SPACE_4 = normalize(4);
+export const SPACE_6 = normalize(6);
+export const SPACE_8 = normalize(8);
+export const SPACE_12 = normalize(12);
+export const SPACE_16 = normalize(16);
+export const SPACE_24 = normalize(24);
+export const SPACE_32 = normalize(32);
+export const SPACE_40 = normalize(40);
+export const SPACE_48 = normalize(48);
+export const SPACE_56 = normalize(56);
+export const SPACE_64 = normalize(64);
+export const SPACE_80 = normalize(80);
+export const SPACE_104 = normalize(104);
+
+export const TEXT_40 = normalize(40);
+export const TEXT_M_1_SIZE = normalize(32);
+export const TEXT_M_1_LINE_HEIGHT = normalize(38);
+export const TEXT_M_2_SIZE = normalize(28);
+export const TEXT_M_2_LINE_HEIGHT = normalize(36);
+export const TEXT_M_3_SIZE = normalize(24);
+export const TEXT_M_3_LINE_HEIGHT = normalize(30);
+export const TEXT_M_4_SIZE = normalize(20);
+export const TEXT_M_4_LINE_HEIGHT = normalize(24);
+export const TEXT_M_5_SIZE = normalize(16);
+export const TEXT_M_5_LINE_HEIGHT = normalize(24);
+export const TEXT_M_6_SIZE = normalize(14);
+export const TEXT_M_6_LINE_HEIGHT = normalize(18);
+export const TEXT_S_1_SIZE = normalize(14);
+export const TEXT_S_1_LINE_HEIGHT = normalize(18);
+export const TEXT_S_2_SIZE = normalize(12);
+export const TEXT_S_2_LINE_HEIGHT = normalize(16);
+export const TEXT_XS_SIZE = normalize(10);
+export const TEXT_XS_LINE_HEIGHT = normalize(12);
